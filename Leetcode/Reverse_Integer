@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int reverse(int x) {
+        bool plus=x>0?true:false;
+        long long temp=plus?x:-x;
+        long long result=0;
+        while(temp)
+        {
+            result=result*10;
+            result+=temp%10;
+            temp/=10;
+        }
+	//转换完成以后越界的考虑
+        if(result>2147483647||(!plus&&result>2147483648))
+        return 0;
+        else
+        {
+            if(plus)return (int)result;
+            return -(int)result;
+        }
+    }
+};

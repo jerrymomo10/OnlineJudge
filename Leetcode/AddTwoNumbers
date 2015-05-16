@@ -1,0 +1,57 @@
+class Solution{
+public:
+	ListNode* addTwoNumbers(ListNode* l1,ListNode* l2){
+		if(l1==NULL&&l2==NULL) return 0;
+		if(l1==NULL)return l2;
+		if(l2==NULL)return l1;
+		int left = l1->val;
+		int right = l2->val;
+		int sum=left+right;
+		ListNode* result;
+		bool up=false;
+		if(sum>9)
+		{
+		    result = new ListNode(sum-10);
+            up=true;
+		}
+		else
+		{
+		    result = new ListNode(left+right);
+		}
+		l1=l1->next;
+		l2=l2->next;
+		ListNode* current=result;
+		ListNode* temp=NULL;
+		while(l1!=NULL||l2!=NULL||up)
+		{
+			left=0;
+			right=0;
+			sum=0;
+			if(l1!=NULL)
+			{
+				left = l1->val; 
+				l1 = l1->next;
+			}
+			if(l2!=NULL)
+			{
+				right = l2->val;
+				l2 = l2->next;
+			}
+			if(up)
+			{
+				sum++;
+				up=false;
+			}
+			sum += left+right;
+			if(sum>9) 
+			{
+				sum = sum-10;
+				up=true;
+			}
+			temp = new ListNode(sum);
+			current->next = temp;
+			current = temp;
+		}
+		return result;
+	}
+	};
